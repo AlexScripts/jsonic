@@ -1,0 +1,16 @@
+{
+  "name": "jsonic-preprocessor",
+  "version": "1.0.0",
+  "description": "JSON Preprocessor",
+  "main": "jsonic-api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "json",
+    "jsonic",
+    "preprocessor"
+  ],
+  "author": "Alexey Yurchenko",
+  "license": "MIT"
+}
