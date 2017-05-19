@@ -3,7 +3,7 @@
 let core = require("./jsonic-core")
 let fs = require("fs")
 
-__jsonic__ = {}
+let __jsonic__ = {}
 
 __jsonic__.object_string = function(s){
     let p = core.parse(s)
