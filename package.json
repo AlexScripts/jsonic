@@ -1,6 +1,6 @@
 {
   "name": "jsonic-preprocessor",
-  "version": "1.0.0",
+  "version": "1.2.2",
   "description": "JSON Preprocessor",
   "main": "jsonic-api.js",
   "scripts": {
@@ -12,5 +12,13 @@
     "preprocessor"
   ],
   "author": "Alexey Yurchenko",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexScripts/jsonic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AlexScripts/jsonic/issues"
+  },
+  "homepage": "https://alexscripts.github.io/jsonic/"
 }
