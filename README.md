@@ -4,6 +4,7 @@
 
 ## 1.JSON 
 
+
 Simple properties:
 
 ```javascript
@@ -252,6 +253,93 @@ call_example log "Hi"!
  alex-pc:~demos$ node demo.js
  Hi
 ```
+---
+
+### String concatenation types
+JSONic has many concatenation types, separated by result of parsing:
+
+- & symbol
+```
+	"Hello" & " " & "World" # => "Hello World"
+```
+
+- \+ sign
+
+```
+	"Hello" + "World" # => "Hello" + "World"
+```
+
+- And nq-concat(not quoted) in arguments of function.  
+
+---
+
+### Marks
+The new update of JSONic is a marks. Mark contain part of code, that not parsed if found, but if call, replaces itself to parsed content. @uses imports all marks in including file.
+
+#### Syntax:
+
+When create:
+
+```
+<name> { <block> }
+```
+
+When call:
+
+```
+<name>?
+```
+
+###### marks.jsonic 
+```
+	fruit_factories {
+		apples (
+			name "Giga-Factory"
+			address "Carl St. 55"
+		)
+		bananas (
+			name "Banana-Factory"
+			address "Carl St. 53"
+		)
+	}
+```
+
+###### demo.jsonic
+
+```
+	@uses marks
+	fruit_factories?
+```
+
+###### demo.js
+
+```
+	let jsonic = require("jsonic-preprocessor")
+	jsonic.fwrite_result("demo.jsonic", "demo.json")
+```
+
+###### Terminal
+
+```bash
+alex-pc:~demos$ node demo.js
+alex-pc:~demos$
+```
+
+### <p align="center">↓</p>
+
+###### demo.json
+```javascript
+{
+	"apples": {	
+		"name": "Giga-Factory",
+		"address": "Carl St. 55"
+	},
+	"bananas": {	
+		"name": "Banana-Factory",
+		"address": "Carl St. 53"
+	}
+}
+```
 
 ---
 ## JavaScript API
@@ -316,12 +404,72 @@ Write result of preprocessing to file
 
 Syntax:
 ```
-	jsonic.fwrite_result(from, to)
+	jsonic.fwrite_result(<from>, <to>)
+```
+
+### jsonic.init_fns
+Initialize all additional functions.
+
+Syntax:
+```
+	jsonic.init_fns()
 ```
 
 ---
 
-### Changelog
+## Additional functions
+
+---
+
+### math
+Have some math functions:
+
+- math.abs a!
+- math.acos a!
+- math.asin a!
+- math.atan a!
+- math.atan2 a,b!
+- math.ceil a!
+- math.cos a!
+- math.exp a!  
+- math.floor a! 
+- math.log a!
+- math.max a,b!
+- math.min a,b!
+- math.pow a,b!
+- math.random!
+- math.round a!
+- math.sin a!
+- math.sqrt a!
+- math.tan a!
+
+### print
+The `print` command gets all arguments and print it:
+
+```
+print "Hello World", 4, 3 + 3! # => Hello World 4 6
+```
+
+### date
+Parses given template and returns date result. Template syntax:
+
+- d - day
+- m - month
+- n - minute
+- y - year
+- h - hour
+
+Other characters will be ignored.
+
+#### Example:
+```
+	curr_date = date "h:m"!
+	print curr_date! # => 12:05
+```
+
+---
+
+## Changelog
 
 ---
 #### 1.0.0
@@ -349,6 +497,26 @@ Removed:
 
 - JSON object returning in object_string, object_file methods.
 
+### 1.2.2
+Fixed:
+
+- Documentation
+
+### 1.3.2
+
+Fixed:
+
+- When call just first function works
+- Documentation
+- Other bugs
+
+Added:
+
+- New concatenation type
+- Marks
+- API Updates
+- Additional functions
+
 ---
 
 ### Will be added
@@ -358,18 +526,6 @@ Site:
 - JSONic live editing
 
 Preprocessor:
-
-- Templates
-Some parts of code, that stored in special space. 
-#### Example:
-
-```javascript
-template:
-	apples 5
-	bananas 6
-	
-template? # => apples 5 \n bananas 6
-```
 
 - Function creating
 
@@ -384,10 +540,6 @@ Math.PI {
 
 demo Math.PI! # => demo: 3.14
 ```
-
-- ret operator
-
-Syntax sugar of  ``` return ```.
 
 #### And more, like IF, ELSE, ELSIF, etc...
 
